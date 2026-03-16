@@ -1,0 +1,22 @@
+<style>
+    .greeting-content { 
+        display: flex; 
+        flex-direction: column; /* スマホでは縦並び */
+        gap: 30px; 
+        background: #fff; 
+        padding: 25px; 
+    }
+    
+    .dragon-img { 
+        width: 100%; 
+        max-width: 100%; /* 横幅いっぱい */
+        height: auto; 
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+    }
+
+    /* パソコン（横幅が広い画面）での見え方 */
+    @media (min-width: 769px) {
+        .greeting-content { flex-direction: row; padding: 50px; }
+        .dragon-img { max-width: 400px; }
+    }
+</style>

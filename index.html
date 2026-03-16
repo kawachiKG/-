@@ -1,0 +1,16 @@
+
+<style>
+    .slideshow { height: 70vh; /* スマホ画面の7割くらいの高さにする */ }
+    
+    .hero-text h1 { 
+        font-size: 2.2rem; /* スマホ用に文字を少し小さく */
+        writing-mode: vertical-rl; 
+        background: rgba(0,0,0,0.3); /* 文字を読みやすくするために薄く背景を入れる */
+        padding: 10px;
+    }
+
+    @media (min-width: 769px) {
+        .slideshow { height: 600px; }
+        .hero-text h1 { font-size: 3.5rem; background: none; }
+    }
+</style>
