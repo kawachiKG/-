@@ -1,10 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>事業内容・技術 | 株式会社河内興業</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; padding: 30px; border-top: 4px solid var(--accent-color); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .tech-box { background: #fff; margin-bottom: 30px; display: flex; flex-wrap: wrap; }
+        .tech-img { flex: 1; min-width: 300px; min-height: 200px; background: #ddd url('https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?q=80&w=600') center/cover; }
+        .tech-txt { flex: 1; padding: 30px; min-width: 300px; }
+    </style>
 </head>
 <body>
     <header>
@@ -17,12 +24,19 @@
     </header>
     <section>
         <h2 class="section-title">事業内容<span>BUSINESS</span></h2>
-        <p style="text-align: center;">神巧テクノワークスに準ずる、高度な土木・基礎工事、施工管理を提供いたします。</p>
-        </section>
-    <section style="background-color: #eee;">
+        <div class="card-grid">
+            <div class="card"><h3>土木・造成工事</h3><p>神巧テクノワークスに準ずる高度な管理体制で、基盤から確かな施工を行います。</p></div>
+            <div class="card"><h3>コンクリート工事</h3><p>耐久性と美しさを両立させた高精度な打設技術を提供します。</p></div>
+            <div class="card"><h3>施工管理</h3><p>安全と工程を徹底管理し、周辺環境へ配慮した運営を実現します。</p></div>
+        </div>
+    </section>
+    <section style="background-color: #f0ede5;">
         <h2 class="section-title">工法・技術<span>TECHNOLOGY</span></h2>
-        <p style="text-align: center;">最新の低振動工法、高精度な品質管理体制を完備。</p>
-        </section>
+        <div class="tech-box">
+            <div class="tech-img"></div>
+            <div class="tech-txt"><h3>低振動・低騒音工法</h3><p>都市部や密集地でも安心して施工をお任せいただけるよう、最新の機材と工法を導入しています。</p></div>
+        </div>
+    </section>
     <footer><p>&copy; 2026 株式会社河内興業</p></footer>
 </body>
 </html>
