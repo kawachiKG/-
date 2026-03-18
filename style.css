@@ -2,65 +2,69 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
 
 :root {
-    --primary-color: #003366; /* 藍色 */
-    --accent-color: #c5a059;  /* 真鍮色 */
-    --bg-paper: #f9f7f2;
+    --primary: #003366; /* 藍色 */
+    --accent: #c5a059;  /* 真鍮色 */
+    --bg: #f9f7f2;
 }
 
+* { box-sizing: border-box; }
 body {
     font-family: 'Noto Serif JP', serif;
-    line-height: 1.8; color: #2c2c2c; margin: 0; padding: 0;
-    background-color: var(--bg-paper);
+    line-height: 1.8; color: #2c2c2c; margin: 0; background: var(--bg);
 }
 
-/* ヘッダー・ナビゲーションをボタン風に */
+/* ヘッダー・ナビゲーション */
 header {
     background: #fff; padding: 10px 5%; display: flex; justify-content: space-between;
-    align-items: center; border-bottom: 3px solid var(--primary-color);
+    align-items: center; border-bottom: 3px solid var(--primary);
     position: sticky; top: 0; z-index: 1000;
 }
-.logo { font-size: 1.2rem; font-weight: bold; color: var(--primary-color); text-decoration: none; }
+.logo { font-size: 1.2rem; font-weight: bold; color: var(--primary); text-decoration: none; }
+
+/* スマホ用メニューボタン */
+.menu-icon { display: none; cursor: pointer; font-size: 1.5rem; color: var(--primary); }
 
 nav ul { list-style: none; display: flex; gap: 10px; margin: 0; padding: 0; }
 .nav-btn {
-    text-decoration: none; color: var(--primary-color); font-size: 0.8rem; font-weight: bold;
-    padding: 8px 15px; border: 1px solid var(--primary-color);
-    transition: 0.3s; background: #fff;
+    text-decoration: none; color: var(--primary); font-size: 0.85rem; font-weight: bold;
+    padding: 8px 15px; border: 1px solid var(--primary); transition: 0.3s;
 }
-.nav-btn:hover { background: var(--primary-color); color: #fff; }
+.nav-btn:hover { background: var(--primary); color: #fff; }
 
-/* 和風ボタン（CTA） */
+/* 和風ボタン */
 .btn-wa {
-    display: inline-block; padding: 15px 40px; position: relative;
-    color: var(--primary-color); text-decoration: none; font-weight: bold;
-    border: 2px solid var(--primary-color); background: transparent;
-    transition: 0.4s; overflow: hidden; z-index: 1;
+    display: inline-block; padding: 15px 40px; border: 2px solid var(--primary);
+    color: var(--primary); text-decoration: none; font-weight: bold;
+    position: relative; transition: 0.4s; z-index: 1; background: #fff;
 }
-.btn-wa::before {
-    content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-    background: var(--primary-color); transition: 0.4s; z-index: -1;
-}
-.btn-wa:hover { color: #fff; }
-.btn-wa:hover::before { left: 0; }
+.btn-wa:hover { color: #fff; background: var(--primary); }
 
-/* 写真＋説明文のレイアウト (神巧テクノワークス風) */
-.content-row { display: flex; flex-wrap: wrap; gap: 40px; margin-bottom: 60px; align-items: center; }
+/* レイアウト */
+section { padding: 60px 5%; max-width: 1100px; margin: 0 auto; }
+.section-title { text-align: center; margin-bottom: 40px; font-size: 2rem; letter-spacing: 0.2em; }
+.section-title span { display: block; font-size: 0.8rem; color: var(--accent); margin-top: 5px; }
+
+.content-row { display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 50px; align-items: center; }
 .content-row:nth-child(even) { flex-direction: row-reverse; }
 .content-img { flex: 1; min-width: 300px; }
-.content-img img { width: 100%; height: auto; border: 1px solid #ddd; box-shadow: 10px 10px 0 rgba(197, 160, 89, 0.2); }
+.content-img img { width: 100%; height: auto; border: 1px solid #ddd; box-shadow: 8px 8px 0 rgba(0,51,102,0.1); }
 .content-txt { flex: 1.2; min-width: 300px; }
-.content-txt h3 { border-left: 5px solid var(--accent-color); padding-left: 15px; color: var(--primary-color); }
 
-/* お問い合わせフォーム */
+/* フォーム */
 .form-group { margin-bottom: 20px; text-align: left; }
-.form-group label { display: block; font-weight: bold; margin-bottom: 5px; }
-input, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; font-family: inherit; box-sizing: border-box; }
+input, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; font-family: inherit; }
 
-/* フッター */
-footer { background: var(--primary-color); color: #fff; padding: 50px 5% 20px; text-align: center; }
+footer { background: var(--primary); color: #fff; padding: 40px 5%; text-align: center; margin-top: 50px; }
 
+/* スマホ対応 (重要) */
 @media (max-width: 768px) {
-    header { flex-direction: column; }
-    nav ul { flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+    .menu-icon { display: block; }
+    nav { 
+        display: none; position: absolute; top: 100%; left: 0; width: 100%; 
+        background: #fff; border-bottom: 2px solid var(--primary); 
+    }
+    nav.active { display: block; }
+    nav ul { flex-direction: column; padding: 20px; gap: 5px; }
+    .nav-btn { display: block; width: 100%; text-align: center; padding: 12px; }
     .content-row { flex-direction: column !important; }
 }

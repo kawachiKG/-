@@ -3,47 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>株式会社河内興業 | 確かな技術・揺るぎない信頼</title>
+    <title>株式会社河内興業 | TOP</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .slideshow { position: relative; width: 100%; height: 70vh; overflow: hidden; background: #000; }
+        .slideshow { position: relative; width: 100%; height: 60vh; overflow: hidden; background: #000; }
         .slide { position: absolute; width: 100%; height: 100%; opacity: 0; animation: fade 30s infinite; background-size: cover; background-position: center; }
-        .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1350'); animation-delay: 0s; }
-        .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1350'); animation-delay: 5s; }
-        .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?q=80&w=1350'); animation-delay: 10s; }
-        .slide:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1590579491624-f98f36d4c763?q=80&w=1350'); animation-delay: 15s; }
-        .slide:nth-child(5) { background-image: url('https://images.unsplash.com/photo-1503387762-592dea58ef23?q=80&w=1350'); animation-delay: 20s; }
-        .slide:nth-child(6) { background-image: url('https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?q=80&w=1350'); animation-delay: 25s; }
+        .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1000'); animation-delay: 0s; }
+        .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1000'); animation-delay: 5s; }
+        .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?q=80&w=1000'); animation-delay: 10s; }
+        .slide:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1590579491624-f98f36d4c763?q=80&w=1000'); animation-delay: 15s; }
+        .slide:nth-child(5) { background-image: url('https://images.unsplash.com/photo-1503387762-592dea58ef23?q=80&w=1000'); animation-delay: 20s; }
+        .slide:nth-child(6) { background-image: url('https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?q=80&w=1000'); animation-delay: 25s; }
         @keyframes fade { 0% { opacity: 0; transform: scale(1.1); } 5% { opacity: 1; } 16% { opacity: 1; } 21% { opacity: 0; } 100% { opacity: 0; } }
-        .hero-text { position: absolute; top: 50%; left: 8%; transform: translateY(-50%); color: #fff; z-index: 10; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-        .hero-text h1 { font-size: 3rem; writing-mode: vertical-rl; letter-spacing: 0.4em; }
-        @media (max-width: 768px) { .hero-text h1 { font-size: 2rem; } }
+        .hero { position: absolute; top: 50%; left: 10%; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero h1 { font-size: 2.5rem; writing-mode: vertical-rl; letter-spacing: 0.3em; }
     </style>
 </head>
 <body>
     <header>
         <a href="index.html" class="logo">株式会社河内興業</a>
-        <nav><ul>
-            <li><a href="services.html">事業・技術</a></li>
-            <li><a href="greeting.html">代表挨拶</a></li>
-            <li><a href="company.html">会社概要</a></li>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <nav id="nav-menu"><ul>
+            <li><a href="services.html" class="nav-btn">事業・技術</a></li>
+            <li><a href="projects.html" class="nav-btn">施工実績</a></li>
+            <li><a href="greeting.html" class="nav-btn">代表挨拶</a></li>
+            <li><a href="contact.html" class="nav-btn">お問い合わせ</a></li>
         </ul></nav>
     </header>
     <div class="slideshow">
         <div class="slide"></div><div class="slide"></div><div class="slide"></div>
         <div class="slide"></div><div class="slide"></div><div class="slide"></div>
-        <div class="hero-text"><h1>江戸川より<br>次代を創る<br>確かな技</h1></div>
+        <div class="hero"><h1>江戸川より<br>次代を創る<br>確かな技</h1></div>
     </div>
     <section style="text-align: center;">
         <h2 class="section-title">新着情報<span>NEWS</span></h2>
-         <p>2026.03 弊社 小島（70代）がステーキ400gを完食いたしました。<p>
-
-<p>2026.03 ホームページを公開いたしました。</p>
-       
+        <p>2026.03.18 ホームページを公開いたしました。</p>
+        <a href="projects.html" class="btn-wa" style="margin-top: 20px;">施工実績を見る</a>
     </section>
-    <footer>
-        <p>株式会社河内興業</p>
-        <a href="tel:09059271930" class="contact-btn">電話：090-5927-1930</a>
-    </footer>
+    <footer><p>&copy; 2026 株式会社河内興業</p></footer>
+    <script>function toggleMenu() { document.getElementById('nav-menu').classList.toggle('active'); }</script>
 </body>
 </html>
