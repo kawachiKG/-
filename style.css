@@ -2,30 +2,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
 
 :root {
-    --primary: #003366; /* 藍色 */
-    --accent: #c5a059;  /* 真鍮色 */
-    --bg-brown: #f2ede4; /* 淡いブラウン（和紙風） */
+    --primary: #003366;
+    --accent: #c5a059;
+    --bg-brown: #f2ede4;
 }
 
 * { box-sizing: border-box; }
 body {
     font-family: 'Noto Serif JP', serif;
     line-height: 1.8; color: #2c2c2c; margin: 0;
-    /* 和風モダンな背景パターン（和紙のような質感） */
     background-color: var(--bg-brown);
     background-image: radial-gradient(#dcd5c9 1px, transparent 1px);
     background-size: 20px 20px;
 }
 
-/* ヘッダー */
+/* ヘッダー：ロゴを1.5倍に拡大 */
 header {
     background: rgba(255, 255, 255, 0.95); padding: 15px 5%; display: flex; justify-content: space-between;
     align-items: center; border-bottom: 3px solid var(--primary);
     position: sticky; top: 0; z-index: 1000;
 }
-.logo { font-size: 1.3rem; font-weight: bold; color: var(--primary); text-decoration: none; }
+.logo { 
+    font-size: 2rem; /* 1.3remから拡大 */
+    font-weight: bold; 
+    color: var(--primary); 
+    text-decoration: none; 
+    letter-spacing: 0.1em;
+}
 
-/* ナビゲーション（ボタン形式） */
+/* ナビゲーション */
 .menu-icon { display: none; cursor: pointer; font-size: 1.5rem; color: var(--primary); }
 nav ul { list-style: none; display: flex; gap: 8px; margin: 0; padding: 0; }
 .nav-btn {
@@ -34,21 +39,16 @@ nav ul { list-style: none; display: flex; gap: 8px; margin: 0; padding: 0; }
 }
 .nav-btn:hover { background: var(--primary); color: #fff; }
 
-/* 和風ボタン（CTA） */
+/* 和風ボタン */
 .btn-wa {
     display: inline-block; padding: 15px 35px; border: 2px solid var(--primary);
     color: var(--primary); text-decoration: none; font-weight: bold;
     position: relative; transition: 0.4s; background: #fff; z-index: 1;
 }
 .btn-wa:hover { color: #fff; background: var(--primary); }
+.btn-tel { background: var(--accent); color: #fff; border: 2px solid var(--accent); }
 
-/* 電話ボタン（特別色） */
-.btn-tel {
-    background: var(--accent); color: #fff; border: 2px solid var(--accent);
-}
-.btn-tel:hover { background: #fff; color: var(--accent); }
-
-/* セクション・レイアウト */
+/* レイアウト共通 */
 section { padding: 80px 5%; max-width: 1100px; margin: 0 auto; }
 .section-title { text-align: center; margin-bottom: 50px; font-size: 2.2rem; letter-spacing: 0.3em; }
 .section-title span { display: block; font-size: 0.9rem; color: var(--accent); margin-top: 5px; }
@@ -64,6 +64,7 @@ footer { background: var(--primary); color: #fff; padding: 50px 5%; text-align: 
 
 /* スマホ対応 */
 @media (max-width: 900px) {
+    .logo { font-size: 1.5rem; } /* スマホでは少し調整 */
     .menu-icon { display: block; }
     nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #fff; border-bottom: 2px solid var(--primary); }
     nav.active { display: block; }
