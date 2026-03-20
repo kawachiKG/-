@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社河内興業 | TOP</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .slideshow { position: relative; width: 100%; height: 80vh; overflow: hidden; background: #222; }
+        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; animation: fade 15s infinite; background-size: cover; background-position: center; }
+        
+        .slide:nth-child(1) { background-image: url('site1.png'); animation-delay: 0s; }
+        .slide:nth-child(2) { background-image: url('site2.png'); animation-delay: 5s; }
+        .slide:nth-child(3) { background-image: url('site3.png'); animation-delay: 10s; }
+
+        @keyframes fade {
+            0% { opacity: 0; transform: scale(1.05); }
+            10% { opacity: 1; }
+            33% { opacity: 1; }
+            43% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* キャッチコピーのコンテナ：はみ出さないように中央〜右寄りに配置 */
+        .hero { 
+            position: absolute; 
+            top: 50%; 
+            right: 15%; /* 余裕を持たせて配置 */
+            transform: translateY(-50%); 
+            color: #fff; 
+            text-shadow: 0 0 20px rgba(0,0,0,0.8); 
+            z-index: 10;
+            height: 70%; /* 縦の範囲を制限してはみ出し防止 */
+            display: flex;
+            align-items: center;
+        }
+
+        /* 霧の中から浮かび上がる演出（位置固定） */
+        .hero h1 { 
+            font-size: 3rem; 
+            writing-mode: vertical-rl; 
+            -webkit-writing-mode: vertical-rl;
+            letter-spacing: 0.5em; 
+            line-height: 1.5;
+            position: absolute; 
+            right: 0; 
+            margin: 0; 
+            opacity: 0;
+            filter: blur(20px);
+            animation: mistFade 15s infinite;
+            white-space: nowrap;
+        }
+        
+        .phrase1 { animation-delay: 0s !important; }
+        .phrase2 { animation-delay: 5s !important; }
+        .phrase3 { animation-delay: 10s !important; }
+
+        @keyframes mistFade {
+            0% { opacity: 0; filter: blur(20px); }
+            8% { opacity: 1; filter: blur(0); }
+            28% { opacity: 1; filter: blur(0); }
+            33% { opacity: 0; filter: blur(20px); }
+            100% { opacity: 0; }
+        }
+
+        /* スマホ用（幅768px以下）の調整 */
+        @media (max-width: 768px) {
+            .slideshow { height: 70vh; } /* 少し高さを抑える */
+            .hero { right: 10%; height: 60%; }
+            .hero h1 { font-size: 1.8rem; letter-spacing: 0.3em; } /* 文字を小さくして収める */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">株式会社河内興業</a>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <nav id="nav-menu"><ul>
+            <li><a href="services.html" class="nav-btn">事業・技術</a></li>
+            <li><a href="projects.html" class="nav-btn">施工実績</a></li>
+            <li><a href="greeting.html" class="nav-btn">代表挨拶</a></li>
+            <li><a href="company.html" class="nav-btn">会社概要</a></li>
+            <li><a href="contact.html" class="nav-btn">お問い合わせ</a></li>
+        </ul></nav>
+    </header>
+    <div class="slideshow">
+        <div class="slide"></div><div class="slide"></div><div class="slide"></div>
+        <div class="hero">
+            <h1 class="phrase1">次代を創る確かな技</h1>
+            <h1 class="phrase2">次代への架け橋となる技術の継承</h1>
+            <h1 class="phrase3">江戸川より全国へ拡げる技術の輪</h1>
+        </div>
+    </div>
+    <section style="text-align: center;">
+        <h2 class="section-title">新着情報<span>NEWS</span></h2>
+        <div style="max-width: 600px; margin: 0 auto; text-align: left; background: #fff; padding: 20px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <p style="border-bottom: 1px solid #eee; padding: 10px 0;">2026.03.18 ホームページを公開いたしました。</p>
+            <p style="border-bottom: 1px solid #eee; padding: 10px 0;">2026.03.15 施工写真を更新しました。</p>
+        </div>
+        <div style="margin-top: 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+            <a href="projects.html" class="btn-wa">施工実績を見る</a>
+            <a href="tel:09059271930" class="btn-wa btn-tel">お急ぎの方：090-5927-1930</a>
+        </div>
+    </section>
+    <footer><p>&copy; 2026 株式会社河内興業 | 東京都江戸川区春江町3-19-2</p></footer>
+    <script>function toggleMenu() { document.getElementById('nav-menu').classList.toggle('active'); }</script>
+</body>
+</html>
