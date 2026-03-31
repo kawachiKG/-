@@ -1,8 +1,8 @@
 /* ==========================================================================
-   株式会社河内興業 - 共通スタイルシート（ロゴフォント指定：DFGys3gyoushotai.TTC）
+   株式会社河内興業 - 共通スタイルシート（ロゴ：最大インパクト設定）
    ========================================================================== */
 
-/* 日本語フォント（本文用：Noto Serif JP）の読み込み */
+/* 日本語フォント（本文用） */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
 
 /* 指定フォント（DFGys3gyoushotai.TTC）の定義 */
@@ -50,15 +50,20 @@ header {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
+/* -----------------------------------------------------------
+   ロゴ：株式会社河内興業（インパクト調整箇所）
+   ----------------------------------------------------------- */
 .logo {
-    /* 全ページのロゴに指定フォントを適用 */
     font-family: 'CompanyLogoFont', 'Noto Serif JP', serif;
-    font-size: 2rem;
-    font-weight: normal;
+    font-size: 2.8rem;      /* PCでのサイズを大幅にアップ */
+    font-weight: bold;      /* 行書体の線をはっきりさせる */
     color: var(--primary);
     text-decoration: none;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;  /* 文字の間隔を広げて威風堂々とした佇まいに */
     transition: 0.3s;
+    white-space: nowrap;    /* 折り返しを禁止 */
+    line-height: 1;
+    display: block;
 }
 
 .logo:hover {
@@ -201,14 +206,16 @@ footer p {
     opacity: 0.8;
 }
 
-/* レスポンシブ対応 */
+/* レスポンシブ対応（スマホ・タブレット用） */
 @media (max-width: 900px) {
     header {
         padding: 10px 4%;
     }
 
+    /* スマホでのロゴのインパクトと視認性の両立 */
     .logo {
-        font-size: 1.25rem;
+        font-size: 1.6rem;      /* スマホで見られる限界まで大きく調整 */
+        letter-spacing: 0.05em; /* 画面幅が狭いため、間隔を少しだけ調整 */
     }
 
     .menu-icon {
