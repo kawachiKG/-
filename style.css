@@ -1,9 +1,17 @@
 /* ==========================================================================
-   株式会社河内興業 - 共通スタイルシート
+   株式会社河内興業 - 共通スタイルシート（ロゴフォント指定：DFGys3gyoushotai.TTC）
    ========================================================================== */
 
-/* 日本語フォント（和モダンな明朝体）の読み込み */
+/* 日本語フォント（本文用：Noto Serif JP）の読み込み */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
+
+/* 指定フォント（DFGys3gyoushotai.TTC）の定義 */
+@font-face {
+    font-family: 'CompanyLogoFont';
+    src: url('DFGys3gyoushotai.TTC');
+    font-weight: normal;
+    font-style: normal;
+}
 
 :root {
     --primary: #003366;    /* 信頼の紺色 */
@@ -24,7 +32,6 @@ body {
     line-height: 1.8;
     color: var(--text-main);
     background-color: var(--bg-brown);
-    /* 背景にうっすらと和風の質感を出すドットパターン */
     background-image: radial-gradient(#dcd5c9 1px, transparent 1px);
     background-size: 20px 20px;
 }
@@ -44,8 +51,10 @@ header {
 }
 
 .logo {
-    font-size: 2rem; /* 元の1.3remから約1.5倍に拡大 */
-    font-weight: bold;
+    /* 全ページのロゴに指定フォントを適用 */
+    font-family: 'CompanyLogoFont', 'Noto Serif JP', serif;
+    font-size: 2rem;
+    font-weight: normal;
     color: var(--primary);
     text-decoration: none;
     letter-spacing: 0.05em;
@@ -151,7 +160,7 @@ section {
     color: var(--primary);
 }
 
-/* ボタンデザイン（和風） */
+/* ボタンデザイン */
 .btn-wa {
     display: inline-block;
     padding: 15px 40px;
@@ -192,25 +201,22 @@ footer p {
     opacity: 0.8;
 }
 
-/* ==========================================================================
-   レスポンシブ対応（スマホ・タブレット用）
-   ========================================================================== */
-
+/* レスポンシブ対応 */
 @media (max-width: 900px) {
     header {
         padding: 10px 4%;
     }
 
     .logo {
-        font-size: 1.25rem; /* スマホでは社名がはみ出さないように調整 */
+        font-size: 1.25rem;
     }
 
     .menu-icon {
-        display: block; /* ハンバーガーメニューを表示 */
+        display: block;
     }
 
     nav {
-        display: none; /* 初期状態は非表示 */
+        display: none;
         position: absolute;
         top: 100%;
         left: 0;
@@ -221,7 +227,7 @@ footer p {
     }
 
     nav.active {
-        display: block; /* メニュー開閉用 */
+        display: block;
     }
 
     nav ul {
