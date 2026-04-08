@@ -1,12 +1,14 @@
 /* ==========================================================================
-   株式会社河内興業 - 共通スタイルシート
+   株式会社河内興業 - 共通スタイルシート（最終完成・バグ修正版）
    ロゴ：DFGys3gyoushotai.TTC 
-   メニュー：X変形（白抜き変化） ＆ すりガラス透過フェード演出
+   メニュー：X変形＆65%すりガラス透過フェード演出（バグ修正済）
    ========================================================================== */
 
-/* 1. フォント定義 */
+/* 1. フォント定義
+   ----------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
 
+/* 指定フォント（DFGys3gyoushotai.TTC）の定義 */
 @font-face {
     font-family: 'CompanyLogoFont';
     src: url('DFGys3gyoushotai.TTC');
@@ -17,11 +19,12 @@
 :root {
     --primary: #003366;    /* 信頼の紺色 */
     --accent: #c5a059;     /* 伝統の金茶色 */
-    --bg-brown: #f2ede4;  /* 和紙風の背景色 */
-    --text-main: #2c2c2c;  /* 墨色 */
+    --bg-brown: #f2ede4;  /* 温かみのある和紙風の背景色 */
+    --text-main: #2c2c2c;  /* 読みやすい墨色 */
 }
 
-/* 2. 基本設定 */
+/* 2. 基本設定
+   ----------------------------------------------------------- */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -33,11 +36,14 @@ body {
     line-height: 1.8;
     color: var(--text-main);
     background-color: var(--bg-brown);
+    /* 背景にうっすらと和風の質感を出すドットパターン（トップ画像外） */
     background-image: radial-gradient(#dcd5c9 1px, transparent 1px);
     background-size: 20px 20px;
+    overflow-x: hidden; /* メニューのスライドによる横揺れ防止 */
 }
 
-/* 3. ヘッダー ＆ ロゴ */
+/* 3. ヘッダー ＆ ロゴ
+   ----------------------------------------------------------- */
 header {
     background: rgba(255, 255, 255, 0.95);
     padding: 15px 5%;
@@ -53,7 +59,7 @@ header {
 
 .logo {
     font-family: 'CompanyLogoFont', 'Noto Serif JP', serif;
-    font-size: 2.8rem;
+    font-size: 2.8rem; /* PCでのサイズ、インパクト重視 */
     font-weight: bold;
     color: var(--primary);
     text-decoration: none;
@@ -68,16 +74,18 @@ header {
     opacity: 0.8;
 }
 
-/* 4. ハンバーガーアイコン（開いた時は白に変化） */
+/* 4. ハンバーガーアイコン（1番：Xへの滑らかな変形、白抜き変化）
+   ----------------------------------------------------------- */
 .menu-icon {
-    display: none; 
+    display: none; /* デスクトップでは非表示 */
     position: relative;
     width: 32px;
     height: 24px;
     cursor: pointer;
-    z-index: 2000; /* メニュー背景より手前に */
+    z-index: 2000; /* メニュー背景より手前に配置 */
 }
 
+/* 3本の線の共通設定 */
 .menu-icon span,
 .menu-icon::before,
 .menu-icon::after {
@@ -87,30 +95,38 @@ header {
     height: 3px;
     background-color: var(--primary);
     border-radius: 3px;
+    /* transition: 動きの速度とタイミング */
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
                 opacity 0.3s ease, 
-                background-color 0.3s ease; /* 色の変化を滑らかに */
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
 }
 
-.menu-icon span { top: 10px; }
-.menu-icon::before { top: 0; }
-.menu-icon::after { top: 20px; }
+.menu-icon span { top: 10px; } /* 真ん中の線 */
+.menu-icon::before { top: 0; } /* 上の線 */
+.menu-icon::after { top: 20px; } /* 下の線 */
 
-/* アイコン変形：アクティブ時（×になり、色が白になる） */
+/* 【修正点2】×ボタンの表示バグ修正：
+   アクティブ時（×になり、色が白になり、わずかに光る） */
 .menu-icon.active span { 
     opacity: 0; 
-    transform: translateX(-15px); 
-}
-.menu-icon.active::before { 
-    transform: translateY(10px) rotate(45deg); 
-    background-color: #fff; /* 暗い背景の上で目立つように白へ */
-}
-.menu-icon.active::after { 
-    transform: translateY(-10px) rotate(-45deg); 
-    background-color: #fff; /* 同上 */
+    transform: translateX(-15px); /* 真ん中の線を左に消す */
 }
 
-/* 5. ナビゲーション（PC版） */
+.menu-icon.active::before { 
+    transform: translateY(10px) rotate(45deg); /* 上の線を中央に寄せて回転 */
+    background-color: #fff !important; /* 暗いすりガラス背景の上で目立つように強制的に白 */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* わずかに光らせて視認性を確保 */
+}
+
+.menu-icon.active::after { 
+    transform: translateY(-10px) rotate(-45deg); /* 下の線を中央に寄せて回転 */
+    background-color: #fff !important; /* 同上 */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* 同上 */
+}
+
+/* 5. ナビゲーション（PC版 ＆ スマホ版共通設定）
+   ----------------------------------------------------------- */
 nav ul {
     list-style: none;
     display: flex;
@@ -134,7 +150,8 @@ nav ul {
     color: #fff;
 }
 
-/* 6. コンテンツ設定 */
+/* 6. コンテンツ設定（省略なし）
+   ----------------------------------------------------------- */
 section {
     padding: 80px 5%;
     max-width: 1100px;
@@ -149,6 +166,15 @@ section {
     color: var(--primary);
 }
 
+.section-title span {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-top: 10px;
+    letter-spacing: 0.1em;
+}
+
+/* ボタンデザイン */
 .btn-wa {
     display: inline-block;
     padding: 15px 40px;
@@ -160,68 +186,98 @@ section {
     background: #fff;
 }
 
-.btn-wa:hover { background: var(--primary); color: #fff; }
-.btn-tel { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-wa:hover {
+    color: #fff;
+    background: var(--primary);
+}
 
-footer { background: var(--primary); color: #fff; padding: 60px 5% 30px; text-align: center; }
+.btn-tel {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
 
-/* 7. レスポンシブ（スマホ版：透過すりガラス演出） */
+/* フッター */
+footer {
+    background: var(--primary);
+    color: #fff;
+    padding: 60px 5% 30px;
+    text-align: center;
+}
+
+/* 7. レスポンシブ対応（スマホ・タブレット用：65%すりガラス透過フェード演出）
+   ----------------------------------------------------------- */
 @media (max-width: 900px) {
+    header { padding: 10px 4%; }
+
     .logo {
-        font-size: 1.6rem;
+        font-size: 1.6rem; /* スマホでは長い社名がはみ出さないように調整 */
         letter-spacing: 0.05em;
     }
 
-    .menu-icon { display: block; }
+    .menu-icon {
+        display: block; /* ハンバーガーアイコンを表示 */
+    }
 
-    /* スマホナビ：背景を透過＆すりガラス効果 */
+    /* 【修正点3】メニューのサイズ縮小（65%）とすりガラス透過フェード演出 */
     nav {
         position: fixed;
         top: 0;
-        left: 0;
-        width: 100%;
+        right: 0; /* 右端に配置 */
+        width: 65%; /* 【修正点】画面幅の65%に縮小 */
         height: 100vh;
         /* 背景を半透明のブランドカラー（紺色）に設定 */
         background: rgba(0, 51, 102, 0.85); 
-        /* 背景のサイトをすりガラスのようにぼかす（iPhoneなどの最新ブラウザ用） */
+        /* すりガラス効果：背景のサイトをぼかす（iPhoneなどで動作） */
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
         
-        z-index: 1050;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.5s ease, visibility 0.5s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        z-index: 1050; /* ヘッダーより手前に配置 */
+        
+        /* 初期状態：画面右外側に隠す */
+        transform: translateX(100%);
+        /* スライドの滑らかさ設定（摩擦感のある高級な動き） */
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        
+        display: block;
+        padding-top: 100px; /* ヘッダーと重ならないように調整 */
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
     }
 
+    /* active時に画面内へスライドイン */
     nav.active {
-        opacity: 1;
-        visibility: visible;
+        transform: translateX(0);
     }
 
     nav ul {
         flex-direction: column;
-        padding: 0;
+        padding: 20px 10%;
         gap: 0;
-        width: 80%;
-        text-align: center;
+        width: 100%;
+        text-align: left; /* 文字を左寄せにして和風の上品さを出す */
     }
 
     .nav-btn {
         display: block;
         width: 100%;
-        padding: 25px;
-        font-size: 1.2rem;
+        padding: 25px 0;
+        font-size: 1.1rem;
         color: #fff; /* 暗い背景に合わせて文字を白に */
         border: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 区切り線も薄い白に */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 区切り線も薄い白に */
         background: transparent;
+        transition: 0.3s;
     }
 
+    .nav-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--accent);
+    }
+
+    /* メニュー項目も時間差でふわっと出す演出を追加 */
     nav.active .nav-btn {
         animation: menuFadeIn 0.6s ease forwards;
+        animation-delay: 0.2s; /* メニュー本体のスライド後に開始 */
     }
 }
 
