@@ -22,22 +22,21 @@
             100% { opacity: 0; }
         }
 
-        /* キャッチコピーのコンテナ：画面中央に配置し、はみ出しを防止 */
+        /* キャッチコピーのコンテナ */
         .hero { 
             position: absolute; 
             top: 50%; 
             left: 50%; 
             transform: translate(-50%, -50%); 
-            width: 90%; /* 画面幅の90%に収める */
+            width: 90%; 
             text-align: center; 
             z-index: 10;
             color: #fff; 
             text-shadow: 0 0 20px rgba(0,0,0,0.9); 
         }
 
-        /* 横書き・霧の中から浮かび上がる演出（位置固定） */
         .hero h1 { 
-            font-size: 3.5rem; /* PCでのサイズ */
+            font-size: 3.5rem;
             font-weight: bold;
             letter-spacing: 0.2em; 
             line-height: 1.4;
@@ -50,12 +49,8 @@
             opacity: 0;
             filter: blur(20px);
             animation: mistFade 15s infinite;
-            /* 横書き設定（デフォルト） */
-            writing-mode: horizontal-tb;
-            -webkit-writing-mode: horizontal-tb;
         }
         
-        /* 3つのフレーズの切り替えタイミング */
         .phrase1 { animation-delay: 0s !important; }
         .phrase2 { animation-delay: 5s !important; }
         .phrase3 { animation-delay: 10s !important; }
@@ -68,11 +63,19 @@
             100% { opacity: 0; }
         }
 
-        /* スマホ用調整（画面サイズに合わせて文字を縮小） */
-        @media (max-width: 768px) {
+        /* 【修正点3】新着情報とNEWSの差別化スタイル */
+        .section-title span {
+            display: block; /* 強制的に改行 */
+            font-size: 0.9rem; /* サイズを小さく */
+            color: #c5a059; /* 金茶色で差別化 */
+            letter-spacing: 0.2em;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 900px) {
             .slideshow { height: 60vh; }
             .hero h1 { 
-                font-size: 1.5rem; /* スマホで1行に収まるサイズ */
+                font-size: 1.5rem; 
                 letter-spacing: 0.1em;
             }
         }
@@ -81,15 +84,19 @@
 <body>
     <header>
         <a href="index.html" class="logo">株式会社河内興業</a>
+        
         <div class="menu-icon" id="menu-trigger" onclick="toggleMenu()"><span></span></div>
-        <div class="menu-close" onclick="toggleMenu()">× CLOSE</div>
-                <nav id="nav-menu"><ul>
-            <li><a href="services.html" class="nav-btn">事業・技術</a></li>
-            <li><a href="projects.html" class="nav-btn">施工実績</a></li>
-            <li><a href="greeting.html" class="nav-btn">代表挨拶</a></li>
-            <li><a href="company.html" class="nav-btn">会社概要</a></li>
-            <li><a href="contact.html" class="nav-btn">お問い合わせ</a></li>
-        </ul></nav>
+        
+        <nav id="nav-menu">
+            <div class="menu-close" onclick="toggleMenu()">× CLOSE</div>
+            <ul>
+                <li><a href="services.html" class="nav-btn">事業・技術</a></li>
+                <li><a href="projects.html" class="nav-btn">施工実績</a></li>
+                <li><a href="greeting.html" class="nav-btn">代表挨拶</a></li>
+                <li><a href="company.html" class="nav-btn">会社概要</a></li>
+                <li><a href="contact.html" class="nav-btn">お問い合わせ</a></li>
+            </ul>
+        </nav>
     </header>
 
     <div class="slideshow">
@@ -103,13 +110,15 @@
 
     <section style="text-align: center;">
         <h2 class="section-title">新着情報<span>NEWS</span></h2>
+        
         <div style="max-width: 600px; margin: 0 auto; text-align: left; background: #fff; padding: 20px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
             <p style="border-bottom: 1px solid #eee; padding: 10px 0;">2026.04.07 葛西にて社内食事会を開催いたしました。</p>
             <p style="border-bottom: 1px solid #eee; padding: 10px 0;">2026.03.20 両国にて社内食事会を開催いたしました。</p>
             <p style="border-bottom: 1px solid #eee; padding: 10px 0;">2026.03.18 葛西にて社内食事会を開催いたしました。</p>
             <p style="border-bottom: 1px solid #eee; padding: 10px 0;">2026.03.18 施工写真を更新いたしました。</p>
-                        <p style="border-bottom: 1px solid #eee; padding: 10px 0;">2026.03.18 ホームページを公開いたしました。</p>
-            </div>
+            <p style="border-bottom: 1px solid #eee; padding: 10px 0;">2026.03.18 ホームページを公開いたしました。</p>
+        </div>
+        
         <div style="margin-top: 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
             <a href="projects.html" class="btn-wa">施工実績を見る</a>
             <a href="tel:09059271930" class="btn-wa btn-tel">お急ぎの方：090-5927-1930</a>
@@ -119,8 +128,10 @@
     <footer><p>&copy; 2026 株式会社河内興業</p></footer>
 
     <script>
+        // 【修正点4】JavaScript：メニュー本体と、アイコン自体のクラスを同時に切り替え
         function toggleMenu() {
             document.getElementById('nav-menu').classList.toggle('active');
+            document.getElementById('menu-trigger').classList.toggle('active');
         }
     </script>
 </body>
