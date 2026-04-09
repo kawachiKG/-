@@ -5,20 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>事業・技術 | 株式会社河内興業</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* 【追加】画像がスマホで画面に収まるように設定 */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 【修正点3】英字タイトルの差別化スタイル（全ページ統一） */
+        .section-title span {
+            display: block; 
+            font-size: 0.9rem; 
+            color: #c5a059; /* 金茶色 */
+            letter-spacing: 0.2em;
+            margin-top: 5px;
+        }
+
+        /* 事業内容のレイアウト設定 */
+        .content-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: #fff;
+            padding: 40px;
+            margin-bottom: 30px;
+            align-items: center;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .content-img {
+            flex: 1;
+            min-width: 300px;
+            max-width: 450px;
+        }
+
+        .content-txt {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .content-txt h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* スマホでの表示調整 */
+        @media (max-width: 768px) {
+            .content-row { padding: 25px 20px; gap: 20px; }
+            .content-img { max-width: 100%; }
+            .content-txt h3 { font-size: 1.2rem; }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo">河内興業</a>
+        <a href="index.html" class="logo">株式会社河内興業</a>
+        
         <div class="menu-icon" id="menu-trigger" onclick="toggleMenu()"><span></span></div>
-        <div class="menu-close" onclick="toggleMenu()">× CLOSE</div>        
-          <nav id="nav-menu"><ul>
-            <li><a href="services.html" class="nav-btn">事業・技術</a></li>
-            <li><a href="projects.html" class="nav-btn">施工実績</a></li>
-            <li><a href="greeting.html" class="nav-btn">代表挨拶</a></li>
-            <li><a href="company.html" class="nav-btn">会社概要</a></li>
-            <li><a href="contact.html" class="nav-btn">お問い合わせ</a></li>
-        </ul></nav>
+        
+        <nav id="nav-menu">
+            <div class="menu-close" onclick="toggleMenu()">× CLOSE</div>
+            <ul>
+                <li><a href="services.html" class="nav-btn">事業・技術</a></li>
+                <li><a href="projects.html" class="nav-btn">施工実績</a></li>
+                <li><a href="greeting.html" class="nav-btn">代表挨拶</a></li>
+                <li><a href="company.html" class="nav-btn">会社概要</a></li>
+                <li><a href="contact.html" class="nav-btn">お問い合わせ</a></li>
+            </ul>
+        </nav>
     </header>
+
+    <main>
     <section>
         <h2 class="section-title">事業内容<span>BUSINESS</span></h2>
         
@@ -46,9 +106,20 @@
             </div>
         </div>
 
-        <div style="text-align: center;"><a href="tel:09059271930" class="btn-wa btn-tel">技術に関するお問い合わせ</a></div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="tel:09059271930" class="btn-wa btn-tel">技術に関するお問い合わせ</a>
+        </div>
     </section>
+    </main>
+
     <footer><p>&copy; 2026 株式会社河内興業</p></footer>
-    <script>function toggleMenu() { document.getElementById('nav-menu').classList.toggle('active'); }</script>
+
+    <script>
+        // 【修正点】メニュー本体とアイコン変形を同時に実行
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+            document.getElementById('menu-trigger').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

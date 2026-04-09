@@ -5,22 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>施工実績 | 株式会社河内興業</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* 【追加】画像がスマホで画面に収まるように設定 */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 【修正点3】英字タイトルの差別化スタイル（全ページ統一） */
+        .section-title span {
+            display: block; 
+            font-size: 0.9rem; 
+            color: #c5a059; /* 金茶色 */
+            letter-spacing: 0.2em;
+            margin-top: 5px;
+        }
+
+        /* 施工実績リストのレイアウト */
+        .content-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            background: #fff;
+            padding: 30px;
+            margin-bottom: 30px;
+            align-items: center;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .content-img {
+            flex: 1;
+            min-width: 280px;
+            max-width: 400px;
+        }
+
+        .content-img img {
+            width: 100%;
+            border-radius: 2px;
+        }
+
+        .content-txt {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .content-txt h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+        }
+
+        /* スマホでの表示調整 */
+        @media (max-width: 768px) {
+            .content-row { padding: 20px; gap: 15px; }
+            .content-img { max-width: 100%; }
+            .content-txt h3 { font-size: 1.1rem; }
+        }
+    </style>
 </head>
 <body>
     <header>
         <a href="index.html" class="logo">株式会社河内興業</a>
+        
         <div class="menu-icon" id="menu-trigger" onclick="toggleMenu()"><span></span></div>
-        <div class="menu-close" onclick="toggleMenu()">× CLOSE</div>        
-           <nav id="nav-menu"><ul>
-            <li><a href="services.html" class="nav-btn">事業・技術</a></li>
-            <li><a href="projects.html" class="nav-btn">施工実績</a></li>
-            <li><a href="greeting.html" class="nav-btn">代表挨拶</a></li>
-            <li><a href="company.html" class="nav-btn">会社概要</a></li>
-            <li><a href="contact.html" class="nav-btn">お問い合わせ</a></li>
-        </ul></nav>
+        
+        <nav id="nav-menu">
+            <div class="menu-close" onclick="toggleMenu()">× CLOSE</div>
+            <ul>
+                <li><a href="services.html" class="nav-btn">事業・技術</a></li>
+                <li><a href="projects.html" class="nav-btn">施工実績</a></li>
+                <li><a href="greeting.html" class="nav-btn">代表挨拶</a></li>
+                <li><a href="company.html" class="nav-btn">会社概要</a></li>
+                <li><a href="contact.html" class="nav-btn">お問い合わせ</a></li>
+            </ul>
+        </nav>
     </header>
+
     <section>
         <h2 class="section-title">施工実績<span>PROJECTS</span></h2>
+        
         <div class="content-row">
             <div class="content-img"><img src="https://images.unsplash.com/photo-1517089534706-3d5efebb2492?q=80&w=600" alt="実績1"></div>
             <div class="content-txt">
@@ -28,6 +94,7 @@
                 <p>複雑な地層を持つ地域での地盤改良工事。周辺建物への影響を考慮し、最新の低振動工法を採用。無事故・無災害で工期内に完了しました。</p>
             </div>
         </div>
+
         <div class="content-row">
             <div class="content-img"><img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=600" alt="実績2"></div>
             <div class="content-txt">
@@ -36,7 +103,15 @@
             </div>
         </div>
     </section>
+
     <footer><p>&copy; 2026 株式会社河内興業</p></footer>
-    <script>function toggleMenu() { document.getElementById('nav-menu').classList.toggle('active'); }</script>
+
+    <script>
+        // 【修正点】メニュー本体とアイコン変形（×ボタンへの変化）を同時に実行
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+            document.getElementById('menu-trigger').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

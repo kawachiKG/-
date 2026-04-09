@@ -5,36 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>お問い合わせ | 株式会社河内興業</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* 【追加】画像がスマホで画面に収まるように設定 */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 【修正点3】英字タイトルの差別化スタイル（全ページ統一） */
+        .section-title span {
+            display: block; 
+            font-size: 0.9rem; 
+            color: #c5a059; /* 金茶色 */
+            letter-spacing: 0.2em;
+            margin-top: 5px;
+        }
+
+        /* お問い合わせフォーム用追加スタイル */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        /* スマホでのフォームの余白調整 */
+        @media (max-width: 600px) {
+            section { padding: 40px 5%; }
+            .form-container { padding: 25px 15px !important; }
+            .btn-tel { font-size: 1.1rem !important; width: 100%; text-align: center; }
+        }
+    </style>
 </head>
 <body>
     <header>
         <a href="index.html" class="logo">株式会社河内興業</a>
-        <div  class="menu-icon" id="menu-trigger" onclick="toggleMenu()"><span></span></div>
-        <div class="menu-close" onclick="toggleMenu()">× CLOSE</div>        
-<nav id="nav-menu"><ul>
-            <li><a href="services.html" class="nav-btn">事業・技術</a></li>
-            <li><a href="projects.html" class="nav-btn">施工実績</a></li>
-            <li><a href="greeting.html" class="nav-btn">代表挨拶</a></li>
-            <li><a href="company.html" class="nav-btn">会社概要</a></li>
-            <li><a href="contact.html" class="nav-btn">お問い合わせ</a></li>
-        </ul></nav>
+        
+        <div class="menu-icon" id="menu-trigger" onclick="toggleMenu()"><span></span></div>
+        
+        <nav id="nav-menu">
+            <div class="menu-close" onclick="toggleMenu()">× CLOSE</div>
+            <ul>
+                <li><a href="services.html" class="nav-btn">事業・技術</a></li>
+                <li><a href="projects.html" class="nav-btn">施工実績</a></li>
+                <li><a href="greeting.html" class="nav-btn">代表挨拶</a></li>
+                <li><a href="company.html" class="nav-btn">会社概要</a></li>
+                <li><a href="contact.html" class="nav-btn">お問い合わせ</a></li>
+            </ul>
+        </nav>
     </header>
-    <section style="max-width: 800px;">
+
+    <section style="max-width: 800px; margin: 0 auto;">
         <h2 class="section-title">お問い合わせ<span>CONTACT</span></h2>
-        <div style="background: #fff; padding: 40px; border-radius: 4px;">
+        
+        <div class="form-container" style="background: #fff; padding: 40px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
             <div style="margin-bottom: 30px; text-align: center;">
-                <p>お急ぎの場合は、直接お電話にて承ります。</p>
-                <a href="tel:09059271930" class="btn-wa btn-tel" style="font-size: 1.2rem;">090-5927-1930</a>
+                <p style="margin-bottom: 15px;">お急ぎの場合は、直接お電話にて承ります。</p>
+                <a href="tel:09059271930" class="btn-wa btn-tel" style="font-size: 1.2rem; display: inline-block;">090-5927-1930</a>
             </div>
+
             <form>
                 <div class="form-group"><input type="text" placeholder="お名前 / 会社名"></div>
                 <div class="form-group"><input type="email" placeholder="メールアドレス"></div>
                 <div class="form-group"><textarea rows="6" placeholder="お問い合わせ内容"></textarea></div>
-                <button type="submit" class="btn-wa" style="width: 100%; cursor: pointer;">上記の内容で送信する</button>
+                <button type="submit" class="btn-wa" style="width: 100%; cursor: pointer; border-radius: 4px;">上記の内容で送信する</button>
             </form>
         </div>
     </section>
+
     <footer><p>&copy; 2026 株式会社河内興業</p></footer>
-    <script>function toggleMenu() { document.getElementById('nav-menu').classList.toggle('active'); }</script>
+
+    <script>
+        // 【修正点】メニュー本体とアイコン変形を同時に実行
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+            document.getElementById('menu-trigger').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

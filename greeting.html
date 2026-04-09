@@ -6,30 +6,94 @@
     <title>代表挨拶 | 株式会社河内興業</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .greeting-wrap { display: flex; flex-wrap: wrap; gap: 40px; background: #fff; padding: 40px; align-items: center; }
-        .dragon-img { flex: 1; min-width: 300px; max-width: 450px; }
-        .dragon-img img { width: 100%; height: auto; border: 1px solid #ddd; }
-        .greeting-txt { flex: 1; min-width: 300px; }
+        /* 【追加】画像がスマホで画面に収まるように設定 */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 【修正点3】英字タイトルの差別化スタイル（全ページ統一） */
+        .section-title span {
+            display: block; 
+            font-size: 0.9rem; 
+            color: #c5a059; /* 金茶色 */
+            letter-spacing: 0.2em;
+            margin-top: 5px;
+        }
+
+        /* 代表挨拶のレイアウト */
+        .content-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: #fff;
+            padding: 40px;
+            align-items: center;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .content-img {
+            flex: 1;
+            min-width: 300px;
+            max-width: 450px;
+        }
+
+        .content-img img {
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        .content-txt {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .content-txt h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .content-txt p {
+            margin-bottom: 15px;
+        }
+
+        /* スマホでの表示調整 */
+        @media (max-width: 768px) {
+            .content-row { padding: 25px 20px; gap: 20px; }
+            .content-img { max-width: 100%; } /* スマホでは幅いっぱいに */
+            .content-txt h2 { font-size: 1.2rem; }
+        }
     </style>
 </head>
 <body>
     <header>
         <a href="index.html" class="logo">株式会社河内興業</a>
+        
         <div class="menu-icon" id="menu-trigger" onclick="toggleMenu()"><span></span></div>
-        <div class="menu-close" onclick="toggleMenu()">× CLOSE</div>        
-          <nav id="nav-menu"><ul>
-            <li><a href="services.html" class="nav-btn">事業・技術</a></li>
-            <li><a href="projects.html" class="nav-btn">施工実績</a></li>
-            <li><a href="greeting.html" class="nav-btn">代表挨拶</a></li>
-            <li><a href="company.html" class="nav-btn">会社概要</a></li>
-            <li><a href="contact.html" class="nav-btn">お問い合わせ</a></li>
-        </ul></nav>
+        
+        <nav id="nav-menu">
+            <div class="menu-close" onclick="toggleMenu()">× CLOSE</div>
+            <ul>
+                <li><a href="services.html" class="nav-btn">事業・技術</a></li>
+                <li><a href="projects.html" class="nav-btn">施工実績</a></li>
+                <li><a href="greeting.html" class="nav-btn">代表挨拶</a></li>
+                <li><a href="company.html" class="nav-btn">会社概要</a></li>
+                <li><a href="contact.html" class="nav-btn">お問い合わせ</a></li>
+            </ul>
+        </nav>
     </header>
+
     <main>
     <section>
         <h1 class="section-title">代表挨拶<span>MESSAGE</span></h1>
+        
         <div class="content-row">
-            <div class="content-img"><img src="image.png" alt="代表 龍"></div>
+            <div class="content-img"><img src="image.png" alt="代表 竜一"></div>
+            
             <div class="content-txt">
                 <h2>「昇り龍の如く、高みを目指す施工を」</h2>
                 <p>株式会社河内興業 代表取締役の河内竜一です。</p>
@@ -42,6 +106,13 @@
     </main>
 
     <footer><p>&copy; 2026 株式会社河内興業</p></footer>
-    <script>function toggleMenu() { document.getElementById('nav-menu').classList.toggle('active'); document.getElementBYId('menu-trigger').classList.toggle('active');}</script>
+
+    <script>
+        // 【修正点】メニュー本体とアイコン変形、および閉じ動作を統合
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+            document.getElementById('menu-trigger').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
