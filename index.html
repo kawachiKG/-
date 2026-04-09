@@ -3,81 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>株式会社河内興業 | TOP</title>
+    <title>事業・技術 | 株式会社河内興業</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* スライドショーの基本設定 */
-        .slideshow { position: relative; width: 100%; height: 80vh; overflow: hidden; background: #222; }
-        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; animation: fade 15s infinite; background-size: cover; background-position: center; }
-        
-        .slide:nth-child(1) { background-image: url('site1.png'); animation-delay: 0s; }
-        .slide:nth-child(2) { background-image: url('site2.png'); animation-delay: 5s; }
-        .slide:nth-child(3) { background-image: url('site3.png'); animation-delay: 10s; }
-
-        @keyframes fade {
-            0% { opacity: 0; transform: scale(1.05); }
-            10% { opacity: 1; }
-            33% { opacity: 1; }
-            43% { opacity: 0; }
-            100% { opacity: 0; }
+        /* 【追加】画像がスマホで画面に収まるように設定 */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
 
-        /* キャッチコピーのコンテナ */
-        .hero { 
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            width: 90%; 
-            text-align: center; 
-            z-index: 10;
-            color: #fff; 
-            text-shadow: 0 0 20px rgba(0,0,0,0.9); 
-        }
-
-        .hero h1 { 
-            font-size: 3.5rem;
-            font-weight: bold;
-            letter-spacing: 0.2em; 
-            line-height: 1.4;
-            position: absolute; 
-            top: 50%;
-            left: 0;
-            right: 0;
-            transform: translateY(-50%);
-            margin: 0; 
-            opacity: 0;
-            filter: blur(20px);
-            animation: mistFade 15s infinite;
-        }
-        
-        .phrase1 { animation-delay: 0s !important; }
-        .phrase2 { animation-delay: 5s !important; }
-        .phrase3 { animation-delay: 10s !important; }
-
-        @keyframes mistFade {
-            0% { opacity: 0; filter: blur(20px); }
-            10% { opacity: 1; filter: blur(0); }
-            28% { opacity: 1; filter: blur(0); }
-            33% { opacity: 0; filter: blur(20px); }
-            100% { opacity: 0; }
-        }
-
-        /* 【修正点3】新着情報とNEWSの差別化スタイル */
+        /* 【修正点3】英字タイトルの差別化スタイル（全ページ統一） */
         .section-title span {
-            display: block; /* 強制的に改行 */
-            font-size: 0.9rem; /* サイズを小さく */
-            color: #c5a059; /* 金茶色で差別化 */
+            display: block; 
+            font-size: 0.9rem; 
+            color: #c5a059; /* 金茶色 */
             letter-spacing: 0.2em;
             margin-top: 5px;
         }
 
-        @media (max-width: 900px) {
-            .slideshow { height: 60vh; }
-            .hero h1 { 
-                font-size: 1.5rem; 
-                letter-spacing: 0.1em;
-            }
+        /* 事業内容のレイアウト設定 */
+        .content-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: #fff;
+            padding: 40px;
+            margin-bottom: 30px;
+            align-items: center;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            
+            /* 【追加】演出用の初期状態：少し下げて透明にする */
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+        }
+
+        /* 【追加】スクロールして画面に入った時の状態 */
+        .content-row.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-img {
+            flex: 1;
+            min-width: 300px;
+            max-width: 450px;
+        }
+
+        .content-txt {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .content-txt h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* スマホでの表示調整 */
+        @media (max-width: 768px) {
+            .content-row { padding: 25px 20px; gap: 20px; }
+            .content-img { max-width: 100%; }
+            .content-txt h3 { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -99,40 +89,69 @@
         </nav>
     </header>
 
-    <div class="slideshow">
-        <div class="slide"></div><div class="slide"></div><div class="slide"></div>
-        <div class="hero">
-            <h1 class="phrase1">時代を創る確かな技</h1>
-            <h1 class="phrase2">江戸川より全国へ拡げる技術の輪</h1>
-            <h1 class="phrase3">次代への架け橋となる技術の継承</h1>
+    <main>
+    <section>
+        <h2 class="section-title">事業内容<span>BUSINESS</span></h2>
+        
+        <div class="content-row">
+            <div class="content-img"><img src="site1.png" alt="土木工事"></div>
+            <div class="content-txt">
+                <h3>高度な地質調査と土木技術</h3>
+                <p>夜間の現場でも妥協のない精度を追求。コア採取や地層分析を通じ、建物を支える「地中」の真実を明らかにします。正確なデータに基づいた施工こそが、安全な街づくりの第一歩です。</p>
+            </div>
         </div>
-    </div>
 
-    <section style="text-align: center;">
-        <h2 class="section-title">新着情報<span>NEWS</span></h2>
-        
-        <div style="max-width: 600px; margin: 0 auto; text-align: left; background: #fff; padding: 20px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-            <p style="border-bottom: 1px solid #eee; padding: 10px 0;">2026.04.07 葛西にて社内食事会を開催いたしました。</p>
-            <p style="border-bottom: 1px solid #eee; padding: 10px 0;">2026.03.20 両国にて社内食事会を開催いたしました。</p>
-            <p style="border-bottom: 1px solid #eee; padding: 10px 0;">2026.03.18 葛西にて社内食事会を開催いたしました。</p>
-            <p style="border-bottom: 1px solid #eee; padding: 10px 0;">2026.03.18 施工写真を更新いたしました。</p>
-            <p style="border-bottom: 1px solid #eee; padding: 10px 0;">2026.03.18 ホームページを公開いたしました。</p>
+        <div class="content-row">
+            <div class="content-img"><img src="site2.png" alt="施工管理"></div>
+            <div class="content-txt">
+                <h3>現場の「和」を重んじる管理体制</h3>
+                <p>施工管理とは、ただ図面を見るだけではありません。現場で働く一人ひとりと対話し、最新のITツールを活用しながら、円滑かつ安全にプロジェクトを導きます。チームの結束が品質を生みます。</p>
+            </div>
         </div>
-        
-        <div style="margin-top: 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-            <a href="projects.html" class="btn-wa">施工実績を見る</a>
-            <a href="tel:09059271930" class="btn-wa btn-tel">お急ぎの方：090-5927-1930</a>
+
+        <div class="content-row">
+            <div class="content-img"><img src="site3.png" alt="特殊工事"></div>
+            <div class="content-txt">
+                <h3>都市部における機動力</h3>
+                <p>屋内の限られたスペースや夜間工事など、特殊な環境下でも迅速に対応。周辺環境への配慮と高度な技術を両立し、お客様の多様なニーズに応える機動力こそが当社の強みです。</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="tel:09059271930" class="btn-wa btn-tel">技術に関するお問い合わせ</a>
         </div>
     </section>
+    </main>
 
     <footer><p>&copy; 2026 株式会社河内興業</p></footer>
 
     <script>
-        // 【修正点4】JavaScript：メニュー本体と、アイコン自体のクラスを同時に切り替え
+        // メニューの開閉
         function toggleMenu() {
             document.getElementById('nav-menu').classList.toggle('active');
             document.getElementById('menu-trigger').classList.toggle('active');
         }
+
+        /* 【追加】スクロールフェードイン演出の制御 */
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // 10%見えたら実行
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // 画面に入ったら "show" クラスを追加
+                    entry.target.classList.add('show');
+                }
+            });
+        }, observerOptions);
+
+        // すべての .content-row を監視対象にする
+        document.querySelectorAll('.content-row').forEach(row => {
+            observer.observe(row);
+        });
     </script>
 </body>
 </html>
