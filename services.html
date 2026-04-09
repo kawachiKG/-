@@ -33,6 +33,17 @@
             align-items: center;
             border-radius: 4px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            
+            /* 【追加】演出用の初期状態：少し下げて透明にする */
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+        }
+
+        /* 【追加】スクロールして画面に入った時の状態 */
+        .content-row.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .content-img {
@@ -115,11 +126,32 @@
     <footer><p>&copy; 2026 株式会社河内興業</p></footer>
 
     <script>
-        // 【修正点】メニュー本体とアイコン変形を同時に実行
+        // メニューの開閉
         function toggleMenu() {
             document.getElementById('nav-menu').classList.toggle('active');
             document.getElementById('menu-trigger').classList.toggle('active');
         }
+
+        /* 【追加】スクロールフェードイン演出の制御 */
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // 10%見えたら実行
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // 画面に入ったら "show" クラスを追加
+                    entry.target.classList.add('show');
+                }
+            });
+        }, observerOptions);
+
+        // すべての .content-row を監視対象にする
+        document.querySelectorAll('.content-row').forEach(row => {
+            observer.observe(row);
+        });
     </script>
 </body>
 </html>
