@@ -33,43 +33,51 @@
             align-items: center;
             border-radius: 4px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            
-            /* 【修正】演出用の初期状態：以前の移動は削除し、
-               画像と文字、それぞれの動きを制御します */
+
+            /* 【修正】演出用の初期状態：移動や拡大は削除 */
             overflow: hidden; /* 画像が画面外に出るのを防ぐ */
         }
 
-        /* 【修正】画像：初期状態は画面中央に拡大配置 */
+        /* 【修正】画像：初期状態は静止し、上から霧（blur）をかける */
         .content-img {
             flex: 1;
             min-width: 300px;
             max-width: 450px;
+            
+            /* 【修正】静止状態：移動は削除 */
             opacity: 0;
-            transform: scale(2.5) translate(-50%, -50%); /* 画面中央に大きく拡大 */
-            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
-            transform-origin: center center;
+            
+            /* 【修正】霧の中から浮かび上がる演出：blurとopacity */
+            filter: blur(15px); /* 初期状態は強い霧 */
+            
+            /* 【修正】上から下へ晴れるような演出のためのマスク（画像自体をクリップ） */
+            clip-path: inset(0 0 100% 0); /* 上端だけ表示 */
+            
+            /* 動きのアニメーション時間 */
+            transition: opacity 1.5s ease-out, filter 1.5s ease-out, clip-path 1.5s ease-out;
         }
 
-        /* 【修正】文字：初期状態はさらに遅れて、下から移動 */
+        /* 【修正】文字：初期状態は遅れて、下から移動（以前から変更なし） */
         .content-txt {
             flex: 1;
             min-width: 300px;
             opacity: 0;
-            transform: translateY(100px); /* 以前よりも大きな移動距離 */
-            /* 画像よりもさらに遅れて開始するように設定 */
+            transform: translateY(100px); /* 大きな移動距離 */
+            /* 画像よりも遅れて開始 */
             transition: opacity 1.5s ease-out 1s, transform 1.5s ease-out 1s;
         }
 
         /* 【修正】スクロールして画面に入った時の状態：画像 */
         .content-row.show .content-img {
             opacity: 1;
-            transform: scale(1) translate(0, 0); /* 元の位置に収める */
+            filter: blur(0); /* 霧が晴れる */
+            clip-path: inset(0 0 0 0); /* 画像全体を表示 */
         }
 
-        /* 【修正】スクロールして画面に入った時の状態：文字 */
+        /* 【修正】スクロールして画面に入った時の状態：文字（以前から変更なし） */
         .content-row.show .content-txt {
             opacity: 1;
-            transform: translateY(0); /* 元の位置に収める */
+            transform: translateY(0);
         }
 
         .content-txt h3 {
@@ -83,8 +91,8 @@
             .content-row { padding: 25px 20px; gap: 20px; }
             .content-img { max-width: 100%; }
             .content-txt h3 { font-size: 1.2rem; }
-            /* スマホでは画像の動きを少し抑える */
-            .content-img { transform: scale(1.5) translate(-50%, -50%); }
+            /* スマホでは画像の動きを少し抑える（clip-pathのみ修正） */
+            .content-img { clip-path: inset(0 0 80% 0); }
             /* スマホでは文字の遅延も少し短く */
             .content-txt { transition-delay: 0.8s; }
         }
@@ -116,7 +124,7 @@
             <div class="content-img"><img src="site1.png" alt="土木工事"></div>
             <div class="content-txt">
                 <h3>高度な地質調査と土木技術</h3>
-                <p>夜間の現場でも妥協のない精度を追求。コア採取や地層分析を通じ、建物を支える「地中」の真実を明らかにします。正確なデータに基づいた施工こそが、安全な街づくりの第一歩です。</p>
+                <p>夜間の現場でも妥協のない精度を追求.コア採取や地層分析を通じ、建物を支える「地中」の真実を明らかにします。正確なデータに基づいた施工こそが、安全な街づくりの第一歩です。</p>
             </div>
         </div>
 
@@ -124,7 +132,7 @@
             <div class="content-img"><img src="site2.png" alt="施工管理"></div>
             <div class="content-txt">
                 <h3>現場の「和」を重んじる管理体制</h3>
-                <p>施工管理とは、ただ図面を見るだけではありません。現場で働く一人ひとりと対話し、最新のITツールを活用しながら、円滑かつ安全にプロジェクトを導きます。チームの結束が品質を生みます。</p>
+                <p>施工管理とは、ただ図面を見るだけではありません.現場で働く一人ひとりと対話し、最新のITツールを活用しながら、円滑かつ安全にプロジェクトを導きます。チームの結束が品質を生みます。</p>
             </div>
         </div>
 
@@ -132,7 +140,7 @@
             <div class="content-img"><img src="site3.png" alt="特殊工事"></div>
             <div class="content-txt">
                 <h3>都市部における機動力</h3>
-                <p>屋内の限られたスペースや夜間工事など、特殊な環境下でも迅速に対応。周辺環境への配慮と高度な技術を両立し、お客様の多様なニーズに応える機動力こそが当社の強みです。</p>
+                <p>屋内の限られたスペースや夜間工事など、特殊な環境下でも迅速に対応.周辺環境への配慮と高度な技術を両立し、お客様の多様なニーズに応える機動力こそが当社の強みです。</p>
             </div>
         </div>
 
@@ -151,7 +159,7 @@
             document.getElementById('menu-trigger').classList.toggle('active');
         }
 
-        /* スクロールフェードイン演出の制御：以前の Intersection Observer はそのまま */
+        /* スクロールフェードイン演出の制御 */
         const observerOptions = {
             root: null,
             rootMargin: '0px',
