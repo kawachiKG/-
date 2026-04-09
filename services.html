@@ -34,27 +34,42 @@
             border-radius: 4px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             
-            /* 【追加】演出用の初期状態：少し下げて透明にする */
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1.2s ease, transform 1.2s ease;
+            /* 【修正】演出用の初期状態：以前の移動は削除し、
+               画像と文字、それぞれの動きを制御します */
+            overflow: hidden; /* 画像が画面外に出るのを防ぐ */
         }
 
-        /* 【追加】スクロールして画面に入った時の状態 */
-        .content-row.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+        /* 【修正】画像：初期状態は画面中央に拡大配置 */
         .content-img {
             flex: 1;
             min-width: 300px;
             max-width: 450px;
+            opacity: 0;
+            transform: scale(2.5) translate(-50%, -50%); /* 画面中央に大きく拡大 */
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+            transform-origin: center center;
         }
 
+        /* 【修正】文字：初期状態はさらに遅れて、下から移動 */
         .content-txt {
             flex: 1;
             min-width: 300px;
+            opacity: 0;
+            transform: translateY(100px); /* 以前よりも大きな移動距離 */
+            /* 画像よりもさらに遅れて開始するように設定 */
+            transition: opacity 1.5s ease-out 1s, transform 1.5s ease-out 1s;
+        }
+
+        /* 【修正】スクロールして画面に入った時の状態：画像 */
+        .content-row.show .content-img {
+            opacity: 1;
+            transform: scale(1) translate(0, 0); /* 元の位置に収める */
+        }
+
+        /* 【修正】スクロールして画面に入った時の状態：文字 */
+        .content-row.show .content-txt {
+            opacity: 1;
+            transform: translateY(0); /* 元の位置に収める */
         }
 
         .content-txt h3 {
@@ -68,6 +83,10 @@
             .content-row { padding: 25px 20px; gap: 20px; }
             .content-img { max-width: 100%; }
             .content-txt h3 { font-size: 1.2rem; }
+            /* スマホでは画像の動きを少し抑える */
+            .content-img { transform: scale(1.5) translate(-50%, -50%); }
+            /* スマホでは文字の遅延も少し短く */
+            .content-txt { transition-delay: 0.8s; }
         }
     </style>
 </head>
@@ -132,7 +151,7 @@
             document.getElementById('menu-trigger').classList.toggle('active');
         }
 
-        /* 【追加】スクロールフェードイン演出の制御 */
+        /* スクロールフェードイン演出の制御：以前の Intersection Observer はそのまま */
         const observerOptions = {
             root: null,
             rootMargin: '0px',
