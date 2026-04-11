@@ -20,16 +20,45 @@
             margin-top: 5px;
         }
 
+        /* 【修正点1】最上部の余白を1/5ページ分（20vh）確保 */
+        .section-title {
+            text-align: center;
+            padding-top: 100px;
+            margin-bottom: 20vh; /* 1/5ページ分の余白 */
+        }
+
+        /* セクション間のタイトルスタイル */
+        .row-header {
+            text-align: center;
+            padding: 60px 20px;
+            background: #f9f9f9;
+        }
+        .row-header h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        .row-header h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: #c5a059;
+        }
+
         .content-row {
             position: relative;
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
             justify-content: center;
             overflow: hidden; 
-            padding: 0;
-            margin-bottom: 0; /* 隙間なく連続させることで没入感を向上 */
-            height: 100vh; /* 1セクションを画面いっぱいに */
+            height: 80vh; /* 少し高さを抑えて次への期待感を出す */
+            margin-bottom: 10vh; /* セクション間の間隔 */
         }
 
         .content-img {
@@ -40,7 +69,7 @@
             height: 100%;
             z-index: 1;
             filter: blur(0px);
-            transition: filter 0.4s ease-out;
+            will-change: filter;
         }
 
         .content-img img {
@@ -49,7 +78,7 @@
             object-fit: cover;
         }
 
-        /* 文字が埋もれないよう、画像全体に薄いオーバーレイを常時かける */
+        /* オーバーレイ */
         .content-img::after {
             content: '';
             position: absolute;
@@ -57,7 +86,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3); /* 画像を少し暗くして文字を浮かせる */
+            background: rgba(0, 0, 0, 0.4);
             z-index: 2;
         }
 
@@ -67,32 +96,27 @@
             width: 85%;
             max-width: 800px;
             text-align: center;
-            background: none; /* 背景色を削除 */
-            
-            /* 文字の視認性を確保するための強力なシャドウ */
-            text-shadow: 0 2px 15px rgba(0, 0, 0, 1), 0 0 5px rgba(0, 0, 0, 0.8);
-            
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 1);
             opacity: 0;
-            transform: translateY(100px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(50px);
+            will-change: opacity, transform;
         }
 
         .content-txt h3 {
-            color: #fff;
-            margin-bottom: 25px;
-            font-size: 2rem;
-            letter-spacing: 0.1em;
+            display: none; /* 重なっている文字としてのh3は非表示（外側に出したため） */
         }
 
         .content-txt p {
             color: #fff;
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 1.2rem;
+            line-height: 2;
             font-weight: 500;
         }
 
         @media (max-width: 768px) {
-            .content-txt h3 { font-size: 1.5rem; }
+            .section-title { margin-bottom: 15vh; }
+            .row-header h3 { font-size: 1.3rem; }
+            .content-row { height: 70vh; }
             .content-txt p { font-size: 1rem; }
         }
     </style>
@@ -114,33 +138,31 @@
     </header>
 
     <main>
-    <section>
-        <h2 class="section-title" style="position: absolute; width: 100%; text-align: center; z-index: 10; top: 120px; color: #fff; text-shadow: 0 2px 10px #000;">事業内容<span>BUSINESS</span></h2>
+        <h2 class="section-title">事業内容<span>BUSINESS</span></h2>
         
+        <div class="row-header"><h3>高度な地質調査と土木技術</h3></div>
         <div class="content-row">
             <div class="content-img"><img src="image_3.png" alt="地質調査"></div>
             <div class="content-txt">
-                <h3>高度な地質調査と土木技術</h3>
                 <p>夜間の現場でも妥協のない精度を追求。コア採取や地層分析を通じ、建物を支える「地中」の真実を明らかにします。正確なデータに基づいた施工こそが、安全な街づくりの第一歩です。</p>
             </div>
         </div>
 
+        <div class="row-header"><h3>現場の「和」を重んじる管理体制</h3></div>
         <div class="content-row">
             <div class="content-img"><img src="image_4.png" alt="施工管理"></div>
             <div class="content-txt">
-                <h3>現場の「和」を重んじる管理体制</h3>
                 <p>施工管理とは、ただ図面を見るだけではありません。現場で働く一人ひとりと対話し、最新のITツールを活用しながら、円滑かつ安全にプロジェクトを導きます。チームの結束が品質を生みます。</p>
             </div>
         </div>
 
+        <div class="row-header"><h3>都市部における機動力</h3></div>
         <div class="content-row">
             <div class="content-img"><img src="image_5.png" alt="特殊工事"></div>
             <div class="content-txt">
-                <h3>都市部における機動力</h3>
                 <p>屋内の限られたスペースや夜間工事など、特殊な環境下でも迅速に対応。周辺環境への配慮と高度な技術を両立し、お客様の多様なニーズに応える機動力こそが当社の強みです。</p>
             </div>
         </div>
-    </section>
     </main>
 
     <footer><p>&copy; 2026 株式会社河内興業</p></footer>
@@ -151,32 +173,34 @@
             document.getElementById('menu-trigger').classList.toggle('active');
         }
 
-        /* スクロール連動：ぼかし遅延＆背景なし文字演出 */
+        /* アニメーションの精密調整 */
         window.addEventListener('scroll', () => {
             const rows = document.querySelectorAll('.content-row');
             const windowHeight = window.innerHeight;
 
             rows.forEach(row => {
                 const rect = row.getBoundingClientRect();
-                const centerOffset = (rect.top + rect.height / 2) / windowHeight; // 画面中央からの相対位置
+                // 画面中央付近を0とする相対位置（-1.0 〜 1.0）
+                const centerOffset = (rect.top + rect.height / 2) / windowHeight;
 
                 const img = row.querySelector('.content-img');
                 const txt = row.querySelector('.content-txt');
 
-                // 文字の出現タイミング（早めに開始、ゆっくり完了）
-                let txtProgress = 1 - Math.abs(0.5 - centerOffset) * 2.5;
+                /* 1. 文章の出現と維持（txtProgress）
+                   0.5（中央）付近で1になる。係数を1.2に下げることで、クリアな時間を長くした */
+                let txtProgress = 1 - Math.abs(0.5 - centerOffset) * 1.5;
                 txtProgress = Math.min(1, Math.max(0, txtProgress));
 
                 txt.style.opacity = txtProgress;
-                txt.style.transform = `translateY(${(1 - txtProgress) * 60}px)`;
+                txt.style.transform = `translateY(${(1 - txtProgress) * 40}px)`;
 
-                // ぼかしのタイミング（画面中央を過ぎるまで遅延させ、強度も弱めに設定）
-                // 0.5（中央）より上に来た時だけぼかし始める
-                let blurProgress = (0.4 - centerOffset) * 4; 
-                blurProgress = Math.min(1, Math.max(0, blurProgress));
+                /* 2. 写真のぼかし（blurProgress）
+                   文章がくっきり（txtProgressが0.8以上）になった時にぼかしを強くする */
+                let blurTrigger = (txtProgress - 0.7) / 0.3; 
+                blurTrigger = Math.min(1, Math.max(0, blurTrigger));
 
-                const maxBlur = 6; // 最大ぼかし強度を下げました（以前は12）
-                img.style.filter = `blur(${blurProgress * maxBlur}px)`;
+                const maxBlur = 8; 
+                img.style.filter = `blur(${blurTrigger * maxBlur}px)`;
             });
         }, { passive: true });
     </script>
