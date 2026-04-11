@@ -6,114 +6,101 @@
     <title>事業・技術 | 株式会社河内興業</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* グローバルな画像設定 */
         img {
             max-width: 100%;
             height: auto;
             display: block;
         }
 
-        /* 英字タイトルの差別化スタイル（全ページ統一） */
         .section-title span {
             display: block; 
             font-size: 0.9rem; 
-            color: #c5a059; /* 金茶色 */
+            color: #c5a059;
             letter-spacing: 0.2em;
             margin-top: 5px;
         }
 
-        /* 【新演出】事業内容のレイアウト設定
-           画像とテキストを重ねるため、positionをrelativeに変更 */
         .content-row {
             position: relative;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            overflow: visible; /* テキストがはみ出せるように */
-            padding: 0; /* コンテナ全体のパディングは削除 */
-            margin-bottom: 50px;
-            background: none; /* 背面の白背景は削除 */
+            overflow: hidden; 
+            padding: 0;
+            margin-bottom: 0; /* 隙間なく連続させることで没入感を向上 */
+            height: 100vh; /* 1セクションを画面いっぱいに */
         }
 
-        /* 【新演出】画像：背面に配置し、スクロールぼかし用の初期状態 */
         .content-img {
-            position: relative;
-            z-index: 1; /* 背面に配置 */
-            flex: 1;
-            min-width: 100%; /* スマホでも幅いっぱい */
-            max-width: 100%;
-            
-            /* 初期状態：ぼかしなし */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
             filter: blur(0px);
-            
-            /* 【修正点】前の演出は全削除し、スクロール動的制御の受け皿に */
-            transition: filter 0.3s ease; /* スムーズなぼかし変化 */
+            transition: filter 0.4s ease-out;
         }
 
         .content-img img {
             width: 100%;
-            object-fit: cover; /* 画像を親要素に合わせる */
+            height: 100%;
+            object-fit: cover;
         }
 
-        /* 【新演出】文字：前面に配置し、スクロール動的制御の初期状態 */
+        /* 文字が埋もれないよう、画像全体に薄いオーバーレイを常時かける */
+        .content-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* 画像を少し暗くして文字を浮かせる */
+            z-index: 2;
+        }
+
         .content-txt {
-            position: absolute; /* 画像の上に重ねる */
-            z-index: 2; /* 前面に配置 */
-            width: 80%; /* 幅を制限 */
-            max-width: 800px; /* PCでの最大幅 */
-            padding: 40px;
+            position: relative;
+            z-index: 3;
+            width: 85%;
+            max-width: 800px;
+            text-align: center;
+            background: none; /* 背景色を削除 */
             
-            /* 以前のメニューのような半透明紺背景ですりガラス効果 */
-            background: rgba(0, 51, 102, 0.85); 
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            /* 文字の視認性を確保するための強力なシャドウ */
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 1), 0 0 5px rgba(0, 0, 0, 0.8);
             
-            border-radius: 4px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            
-            /* 初期状態：透明、下から移動、少しぼかしておく */
             opacity: 0;
-            transform: translateY(50px);
-            filter: blur(4px); /* テキスト自体のぼかし */
-            
-            /* 動きのアニメーション設定 */
-            transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
+            transform: translateY(100px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
-        /* 【新演出】文字：画面に入った時の状態は、JSで動的に制御 */
-
-        /* テキスト内の文字色を白抜きにして視認性確保 */
         .content-txt h3 {
-            color: #fff; /* 白に */
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-        .content-txt p {
-            color: #fff; /* 白に */
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            letter-spacing: 0.1em;
         }
 
-        /* スマホでの表示調整 */
-        @media (max-width: 900px) {
-            .content-row { margin-bottom: 30px; }
-            .content-img img { height: 60vh; object-fit: cover; } /* 画像を縦長に */
-            
-            .content-txt {
-                width: 90%; /* 幅を広げる */
-                padding: 25px 20px;
-                transform: translateY(30px); /* 移動距離を短く */
-                filter: blur(2px); /* ぼかしを抑える */
-            }
-            .content-txt h3 { font-size: 1.2rem; }
+        .content-txt p {
+            color: #fff;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .content-txt h3 { font-size: 1.5rem; }
+            .content-txt p { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
     <header>
         <a href="index.html" class="logo">株式会社河内興業</a>
-        
         <div class="menu-icon" id="menu-trigger" onclick="toggleMenu()"><span></span></div>
-        
         <nav id="nav-menu">
             <div class="menu-close" onclick="toggleMenu()">× CLOSE</div>
             <ul>
@@ -128,7 +115,7 @@
 
     <main>
     <section>
-        <h2 class="section-title">事業内容<span>BUSINESS</span></h2>
+        <h2 class="section-title" style="position: absolute; width: 100%; text-align: center; z-index: 10; top: 120px; color: #fff; text-shadow: 0 2px 10px #000;">事業内容<span>BUSINESS</span></h2>
         
         <div class="content-row">
             <div class="content-img"><img src="image_3.png" alt="地質調査"></div>
@@ -153,128 +140,45 @@
                 <p>屋内の限られたスペースや夜間工事など、特殊な環境下でも迅速に対応。周辺環境への配慮と高度な技術を両立し、お客様の多様なニーズに応える機動力こそが当社の強みです。</p>
             </div>
         </div>
-
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="tel:09059271930" class="btn-wa btn-tel">技術に関するお問い合わせ</a>
-        </div>
     </section>
     </main>
 
     <footer><p>&copy; 2026 株式会社河内興業</p></footer>
 
     <script>
-        // メニューの開閉（以前のコードを維持）
         function toggleMenu() {
             document.getElementById('nav-menu').classList.toggle('active');
             document.getElementById('menu-trigger').classList.toggle('active');
         }
 
-        /* 【新演出】スクロール動的制御のJS */
-        // 要素が画面にどの程度見えているかを監視するIntersection Observer
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9] // 細かくトリガーする
-        };
+        /* スクロール連動：ぼかし遅延＆背景なし文字演出 */
+        window.addEventListener('scroll', () => {
+            const rows = document.querySelectorAll('.content-row');
+            const windowHeight = window.innerHeight;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const targetRow = entry.target;
-                const targetImg = targetRow.querySelector('.content-img');
-                const targetTxt = targetRow.querySelector('.content-txt');
-                
-                // 画面内に入ってから計算を開始し、パフォーマンスを維持
-                if (entry.isIntersecting) {
-                    // スクロールイベントを監視開始
-                    window.addEventListener('scroll', handleScroll, { passive: true });
-                } else {
-                    // 画面から出たら監視停止
-                    window.removeEventListener('scroll', handleScroll);
-                    // ぼかしとテキストの状態を初期化（画面外では見えないように）
-                    targetImg.style.filter = 'blur(0px)';
-                    targetTxt.style.opacity = '0';
-                    targetTxt.style.transform = 'translateY(50px)';
-                    targetTxt.style.filter = 'blur(4px)';
-                }
+            rows.forEach(row => {
+                const rect = row.getBoundingClientRect();
+                const centerOffset = (rect.top + rect.height / 2) / windowHeight; // 画面中央からの相対位置
+
+                const img = row.querySelector('.content-img');
+                const txt = row.querySelector('.content-txt');
+
+                // 文字の出現タイミング（早めに開始、ゆっくり完了）
+                let txtProgress = 1 - Math.abs(0.5 - centerOffset) * 2.5;
+                txtProgress = Math.min(1, Math.max(0, txtProgress));
+
+                txt.style.opacity = txtProgress;
+                txt.style.transform = `translateY(${(1 - txtProgress) * 60}px)`;
+
+                // ぼかしのタイミング（画面中央を過ぎるまで遅延させ、強度も弱めに設定）
+                // 0.5（中央）より上に来た時だけぼかし始める
+                let blurProgress = (0.4 - centerOffset) * 4; 
+                blurProgress = Math.min(1, Math.max(0, blurProgress));
+
+                const maxBlur = 6; // 最大ぼかし強度を下げました（以前は12）
+                img.style.filter = `blur(${blurProgress * maxBlur}px)`;
             });
-        }, observerOptions);
-
-        // すべての .content-row を監視対象にする
-        document.querySelectorAll('.content-row').forEach(row => {
-            observer.observe(row);
-        });
-
-        /* 各要素のスクロールに応じた動的計算関数 */
-        const elementStates = new Map(); // 各要素の状態を管理
-
-        function handleScroll() {
-            document.querySelectorAll('.content-row').forEach(row => {
-                // 画面内にある要素だけ計算
-                if (!row.classList.contains('show-start')) {
-                    // JSで画面内にあるか判定するために、Intersection Observerをトリガーとして使う
-                    // ここではIntersection Observerは既に動いているので、その状態を利用する
-                    // row.classList.add('show-start')はJS側で要素を区別するために使う
-                    // 実際の計算はスクロール量に基づいて行う
-                }
-
-                // Intersection Observerで画面内にあると判定された要素に対してのみ計算を行う
-                const isVisible = isElementInViewport(row);
-                if (!isVisible) return;
-
-                const rowRect = row.getBoundingClientRect();
-                const viewportHeight = window.innerHeight;
-                
-                // 要素が画面中央に来た時に演出が最大になるように計算
-                // entry.boundingClientRect.topとwindow.innerHeightの関係から相対位置を計算
-                let ratio = (viewportHeight - rowRect.top) / viewportHeight; // 0 (下端) ~ 1 (中央) ~ 1+ (上端)
-                
-                // 中央（0.5）を中心に、前後0.2の範囲で演出が最大になるように調整
-                const startPoint = 0.2; // 画面下から20%見えたら開始
-                const endPoint = 0.8; // 画面上から20%まで見えたら終了
-                
-                if (ratio > startPoint) {
-                    // 演出の開始と終了の範囲内で、進行度を計算（0 ~ 1）
-                    let progress = (ratio - startPoint) / (endPoint - startPoint);
-                    progress = Math.min(1, Math.max(0, progress)); // 0~1にクランプ
-                    
-                    const targetImg = row.querySelector('.content-img');
-                    const targetTxt = row.querySelector('.content-txt');
-                    
-                    // 進行度（progress）に応じてぼかしとテキストの状態を計算
-                    const maxBlurImg = 12; // 画像の最大ぼかし量(px)
-                    const currentBlurImg = Math.round(maxBlurImg * progress);
-                    
-                    const maxTxtY = 50; // テキストの最大移動距離(px)
-                    const currentTxtY = maxTxtY * (1 - progress);
-                    
-                    const maxTxtBlur = 4; // テキスト自体の最大ぼかし量(px)
-                    const currentTxtBlur = Math.round(maxTxtBlur * (1 - progress));
-                    
-                    // 進行度（progress）に基づいてCSSを適用
-                    // ぼかし：徐々に濃くなる（0 -> maxBlurImg px）
-                    targetImg.style.filter = `blur(${currentBlurImg}px)`;
-                    
-                    // テキスト：徐々に現れ、移動し、クリアになる
-                    targetTxt.style.opacity = progress.toString();
-                    targetTxt.style.transform = `translateY(${currentTxtY}px)`;
-                    targetTxt.style.filter = `blur(${currentTxtBlur}px)`;
-                    
-                }
-            });
-        }
-
-        /* 要素が画面内にあるか判定する補助関数（Intersection Observerの補足） */
-        function isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-            
-            // 少しでも画面内（Intersection Observerよりも広い範囲）にあれば判定
-            return (
-                rect.top <= viewportHeight + 100 && // 下から100px見えたら開始
-                rect.bottom >= -100 // 上から100px出たら終了
-            );
-        }
-
+        }, { passive: true });
     </script>
 </body>
 </html>
