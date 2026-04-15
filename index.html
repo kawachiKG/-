@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -6,7 +7,53 @@
     <title>株式会社河内興業 | TOP</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* スライドショーの基本設定 */
+        /* ==========================================================================
+           1. オープニング演出用のスタイル（追加）
+           ========================================================================== */
+        
+        /* アニメーション中のスクロール禁止 */
+        body.is-locked {
+            overflow: hidden;
+        }
+
+        #opening-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #fff; /* 壁の色 */
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .opening-svg {
+            width: 100vw;
+            height: 100vh;
+            transform: scale(1);
+            /* 2.2秒かけてダイナミックにズーム */
+            transition: transform 2.2s cubic-bezier(0.7, 0, 0.3, 1);
+            will-change: transform;
+        }
+
+        /* 実行時に文字の中を突き抜ける（scale 50） */
+        body.is-animated .opening-svg {
+            transform: scale(50); 
+        }
+
+        /* 完了後に消去 */
+        body.is-finished #opening-overlay {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* ==========================================================================
+           2. 既存のスタイル
+           ========================================================================== */
         .slideshow { position: relative; width: 100%; height: 80vh; overflow: hidden; background: #222; }
         .slide { position: absolute; width: 100%; height: 100%; opacity: 0; animation: fade 15s infinite; background-size: cover; background-position: center; }
         
@@ -22,7 +69,6 @@
             100% { opacity: 0; }
         }
 
-        /* キャッチコピーのコンテナ */
         .hero { 
             position: absolute; 
             top: 50%; 
@@ -63,11 +109,10 @@
             100% { opacity: 0; }
         }
 
-        /* 【修正点3】新着情報とNEWSの差別化スタイル */
         .section-title span {
-            display: block; /* 強制的に改行 */
-            font-size: 0.9rem; /* サイズを小さく */
-            color: #c5a059; /* 金茶色で差別化 */
+            display: block; 
+            font-size: 0.9rem; 
+            color: #c5a059; 
             letter-spacing: 0.2em;
             margin-top: 5px;
         }
@@ -81,12 +126,21 @@
         }
     </style>
 </head>
-<body>
+<body class="is-locked"> <div id="opening-overlay">
+        <svg class="opening-svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <mask id="opening-mask">
+                    <rect width="1000" height="500" fill="white" />
+                    <text x="500" y="250" font-family="CompanyLogoFont, serif" font-size="120" font-weight="bold" text-anchor="middle" dominant-baseline="central" fill="black">河内興業</text>
+                </mask>
+            </defs>
+            <rect width="1000" height="500" fill="#fff" mask="url(#opening-mask)" />
+        </svg>
+    </div>
+
     <header>
         <a href="index.html" class="logo">株式会社河内興業</a>
-        
         <div class="menu-icon" id="menu-trigger" onclick="toggleMenu()"><span></span></div>
-        
         <nav id="nav-menu">
             <div class="menu-close" onclick="toggleMenu()">× CLOSE</div>
             <ul>
@@ -128,11 +182,27 @@
     <footer><p>&copy; 2026 株式会社河内興業</p></footer>
 
     <script>
-        // 【修正点4】JavaScript：メニュー本体と、アイコン自体のクラスを同時に切り替え
+        // メニュー開閉
         function toggleMenu() {
             document.getElementById('nav-menu').classList.toggle('active');
             document.getElementById('menu-trigger').classList.toggle('active');
         }
+
+        // 【追加】オープニングアニメーションの実行制御
+        window.addEventListener('load', () => {
+            const body = document.body;
+
+            // 0.3秒待ってからズームを開始（少し余韻を持たせる）
+            setTimeout(() => {
+                body.classList.add('is-animated');
+                
+                // 2.2秒後（ズーム完了後）に、オーバーレイを消してスクロールを許可
+                setTimeout(() => {
+                    body.classList.add('is-finished');
+                    body.classList.remove('is-locked');
+                }, 2200); 
+            }, 300); 
+        });
     </script>
 </body>
 </html>

@@ -1,11 +1,8 @@
 /* ==========================================================================
-   株式会社河内興業 - 共通スタイルシート（最終版）
-   ロゴ：DFGys3gyoushotai.TTC 
-   演出：40%幅・高透過すりガラス ＆ 霧のフェード・イン
+   株式会社河内興業 - 共通スタイルシート（オープニング演出統合版）
    ========================================================================== */
 
-/* 1. フォント定義
-   ----------------------------------------------------------- */
+/* 1. フォント定義 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
 
 @font-face {
@@ -16,14 +13,13 @@
 }
 
 :root {
-    --primary: #003366;    /* 信頼の紺色 */
-    --accent: #c5a059;     /* 伝統の金茶色 */
-    --bg-brown: #f2ede4;  /* 和紙風の背景色 */
-    --text-main: #2c2c2c;  /* 墨色 */
+    --primary: #003366;
+    --accent: #c5a059;
+    --bg-brown: #f2ede4;
+    --text-main: #2c2c2c;
 }
 
-/* 2. 基本設定
-   ----------------------------------------------------------- */
+/* 2. 基本設定 */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -40,8 +36,7 @@ body {
     overflow-x: hidden;
 }
 
-/* 3. ヘッダー ＆ ロゴ
-   ----------------------------------------------------------- */
+/* 3. ヘッダー ＆ ロゴ */
 header {
     background: rgba(255, 255, 255, 0.95);
     padding: 15px 5%;
@@ -68,8 +63,7 @@ header {
     display: block;
 }
 
-/* 4. ハンバーガーアイコン（変形 ＆ 白抜き）
-   ----------------------------------------------------------- */
+/* 4. ハンバーガーアイコン */
 .menu-icon {
     display: none; 
     position: relative;
@@ -88,28 +82,18 @@ header {
     height: 3px;
     background-color: var(--primary);
     border-radius: 3px;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                opacity 0.3s ease, 
-                background-color 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
 }
 
 .menu-icon span { top: 10px; }
 .menu-icon::before { top: 0; }
 .menu-icon::after { top: 20px; }
 
-/* アクティブ時（×印） */
-.menu-icon.active span { opacity: 0; transform: translateX(-15px); }
-.menu-icon.active::before { 
-    transform: translateY(10px) rotate(45deg); 
-    background-color: #fff !important; 
-}
-.menu-icon.active::after { 
-    transform: translateY(-10px) rotate(-45deg); 
-    background-color: #fff !important; 
-}
+.menu-icon.active::before { transform: translateY(10px) rotate(45deg); background-color: #fff; }
+.menu-icon.active span { opacity: 0; }
+.menu-icon.active::after { transform: translateY(-10px) rotate(-45deg); background-color: #fff; }
 
-/* 5. ナビゲーション
-   ----------------------------------------------------------- */
+/* 5. ナビゲーション */
 nav ul {
     list-style: none;
     display: flex;
@@ -125,97 +109,93 @@ nav ul {
     border: 1px solid var(--primary);
     transition: 0.3s ease;
     background: #fff;
-    white-space: nowrap;
 }
 
 .nav-btn:hover { background: var(--primary); color: #fff; }
 
-/* 6. レスポンシブ（スマホ版：40%幅・高透過・霧フェード）
-   ----------------------------------------------------------- */
+/* 6. レスポンシブ */
 @media (max-width: 900px) {
     .logo { font-size: 1.6rem; }
     .menu-icon { display: block; }
 
-    /* スマホメニュー本体：幅40% ＆ 透過度UP(1.7倍増) */
     nav {
         position: fixed;
-        top: 0;
-        right: 0;
-        width: 40%; /* 【修正】画面の40%に縮小 */
-        height: 100vh;
-        /* 【修正】透過度を今の1.7倍（0.85 → 約0.5）に設定 */
+        top: 0; right: 0;
+        width: 40%; height: 100vh;
         background: rgba(0, 51, 102, 0.5); 
         backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        
-        z-index: 1050;
         transform: translateX(100%);
         transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        display: block;
         padding-top: 60px;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
     }
 
     nav.active { transform: translateX(0); }
 
-    nav ul {
-        flex-direction: column;
-        padding: 0;
-        width: 100%;
-    }
-
-    /* 【修正】メニュー項目の霧のような浮き上がり演出 */
     .nav-btn {
         display: block;
-        width: 100%;
         padding: 20px 15%;
-        font-size: 1rem;
         color: #fff;
         border: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         background: transparent;
-        opacity: 0; /* 最初は透明 */
+        opacity: 0;
     }
 
-    /* メニューが開いたときのアニメーション */
-    nav.active .nav-btn {
-        animation: mistFadeIn 0.8s ease forwards;
-    }
+    nav.active .nav-btn { animation: mistFadeIn 0.8s ease forwards; }
 
-    /* 【修正】閉じるボタンの追加スタイル */
     .menu-close {
         display: block;
-        width: 100%;
         padding: 15px 15%;
-        text-align: left;
         color: var(--accent);
         font-size: 0.8rem;
         font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 0.2em;
         cursor: pointer;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 }
 
-/* 霧のように浮かび上がるアニメーション */
 @keyframes mistFadeIn {
-    0% {
-        opacity: 0;
-        filter: blur(8px); /* 霧のぼかし */
-        transform: translateY(5px);
-    }
-    100% {
-        opacity: 1;
-        filter: blur(0); /* クリアになる */
-        transform: translateY(0);
-    }
+    0% { opacity: 0; filter: blur(8px); transform: translateY(5px); }
+    100% { opacity: 1; filter: blur(0); transform: translateY(0); }
 }
 
-/* 7. その他共通パーツ（変更なし）
-   ----------------------------------------------------------- */
+/* 7. 共通パーツ */
 section { padding: 80px 5%; max-width: 1100px; margin: 0 auto; }
 .section-title { text-align: center; margin-bottom: 50px; font-size: 2.2rem; color: var(--primary); }
-.btn-wa { display: inline-block; padding: 15px 40px; border: 2px solid var(--primary); font-weight: bold; transition: 0.4s; background: #fff; text-decoration: none; color: var(--primary); }
-.btn-tel { background: var(--accent); color: #fff; border-color: var(--accent); }
 footer { background: var(--primary); color: #fff; padding: 60px 5% 30px; text-align: center; }
+
+/* 8. 【追加】オープニング演出：ロゴくり抜きズーム 
+   ----------------------------------------------------------- */
+body.is-locked {
+    overflow: hidden; /* アニメーション中はスクロールさせない */
+}
+
+#opening-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100vh;
+    z-index: 9999;
+    background-color: #fff; /* 背景（壁）の色 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.opening-svg {
+    width: 100vw;
+    height: 100vh;
+    transform: scale(1);
+    transition: transform 2.2s cubic-bezier(0.7, 0, 0.3, 1);
+    will-change: transform;
+}
+
+/* アニメーション実行：ロゴの文字を突き抜けるように拡大 */
+.is-animated .opening-svg {
+    transform: scale(50); 
+}
+
+/* 完了後：フェードアウトして非表示 */
+.is-finished #opening-overlay {
+    opacity: 0;
+    visibility: hidden;
+}
